@@ -1,0 +1,150 @@
+\documentclass[class=scrreprt,border=0pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\usepackage{amstext}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{decorations.text}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmath} % Enables turning on sans-serif math mode, and using other environments
+\sansmath % Enable sans-serif math for rest of document
+
+
+\begin{document}
+
+\begin{tabular}{ll}
+\begin{tikzpicture}
+\begin{groupplot} [
+	group style={
+	    group name=limresults,
+		group size=1 by 3, 
+	    vertical sep=1.3cm,
+	},
+	xtick pos = left,
+	ytick pos = bottom,
+]
+
+\nextgroupplot[
+    xmode=log,
+    ymode=log,
+    xlabel=$B / B^\mathrm{(\infty)}_{1/2}$,
+    ylabel=efficiency $E$,
+    ymax = 1.05,
+    ymin = 0.01,
+    xmax=100,
+    ytick={0.01,0.1,1},
+    yticklabels={$10^{\text{-}2}$,$10^{\text{-}1}$,$10^0$},
+    width = 3.5in,
+    height = 6cm,
+    x label style={at={(axis description cs:0.5,0.0)},anchor=north},
+    y label style={at={(axis description cs:0.1,.5)},anchor=south},
+    label style={font=\small},
+    tick label style={font=\scriptsize},
+    cycle list name=color list,
+    every axis plot/.append style={mark=*,ultra thin,smooth,tension = 0.3, every mark/.append style={scale=0.7},},
+]
+
+\addplot+ table [y=E, x=B]{simdata/two_nodes_N_2_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/complete_graph_N_5_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/ring_N_25_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/ring_N_100_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/grid_N_100_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/torus_N_25_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/torus_N_100_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/simplified_city_N_16_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/3cayley_tree_N_46_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/delaunay_random_torus_N_25_B_05_cap_8_x_6.0.txt};
+
+\addplot+ table [y=E, x=B]{simdata/delaunay_random_torus_N_100_B_05_cap_8_x_6.0.txt};
+
+\addplot+[gray, dashed] coordinates {(1.0,0.0001) (1.0, 1.1)};
+
+\node[anchor=north west, draw, align=left, font=\large] at (rel axis cs:0.02,0.98) {\small $\theta = 8$\\
+\small $x = 6.0$};
+
+\node (insetnodetwo) at (rel axis cs:0.94,0.0) {};
+
+\end{groupplot}
+
+\begin{axis}[
+  at={(insetnodetwo)},
+  anchor=south east,
+  yshift=0.8cm,
+  xshift=0.4cm,
+  width=4.5cm,
+  ymin=0.01,
+  ymax = 1.05,
+  xmode=log,
+  ymode=log,
+  xtick pos = left,
+  ytick pos = bottom,
+  xtick={0.01,1,100},
+  xticklabels={$10^{\text{-}2}$,$10^2$,$10^2$},
+  ytick={0.01,0.1,1},
+  yticklabels={$10^{\text{-}2}$,$10^{\text{-}1}$,$10^0$},
+  x label style={at={(axis description cs:0.5,0.0)},anchor=north},
+  y label style={at={(axis description cs:0.1,.5)},anchor=south},
+  legend style={text opacity =1,fill=none,font=\tiny,cells={anchor=west}, draw=none},
+  legend to name=lengendnm,
+  label style={font=\small},
+  tick label style={font=\tiny},
+  cycle list name=color list,
+  every axis plot/.append style={mark=*,ultra thin,smooth,tension = 0.3, every mark/.append style={scale=0.7},},
+]
+
+\tikzset{every mark/.append style={scale=0.7}}
+
+\addplot+ table [y=E, x=B]{simdata/two_nodes_N_2_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{minimal graph}
+
+\addplot+ table [y=E, x=B]{simdata/complete_graph_N_5_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{complete graph}
+
+\addplot+ table [y=E, x=B]{simdata/ring_N_25_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{ring (small)}
+
+\addplot+ table [y=E, x=B]{simdata/ring_N_100_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{ring (large)}
+
+\addplot+ table [y=E, x=B]{simdata/grid_N_100_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{grid}
+
+\addplot+ table [y=E, x=B]{simdata/torus_N_25_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{torus (small)}
+
+\addplot+ table [y=E, x=B]{simdata/torus_N_100_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{torus (large)}
+
+\addplot+ table [y=E, x=B]{simdata/simplified_city_N_16_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{simplified city}
+
+\addplot+ table [y=E, x=B]{simdata/3cayley_tree_N_46_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{Cayley tree}
+
+\addplot+ table [y=E, x=B]{simdata/delaunay_random_torus_N_25_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{Delaunay (small)}
+
+\addplot+ table [y=E, x=B]{simdata/delaunay_random_torus_N_100_B_05_unl_x_7.5_newcorrect.txt};
+\addlegendentry{Delaunay (large)}
+
+\node[anchor=south east, draw] at (rel axis cs:0.95,0.05) {\small $\theta = \infty$};
+
+\addplot+[gray, dashed] coordinates {(1.0,0.0001) (1.0, 1.1)};
+
+\end{axis}
+
+\end{tikzpicture}
+\end{tabular}
+\end{document}

@@ -1,0 +1,136 @@
+\documentclass[class=scrreprt,border=0pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\usepackage{amstext}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{decorations.text}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmath} % Enables turning on sans-serif math mode, and using other environments
+\sansmath % Enable sans-serif math for rest of document
+
+
+\begin{document}
+
+\begin{tabular}{ll}
+\begin{tikzpicture}
+\begin{groupplot} [
+	group style={
+	    group name=limresults,
+		group size=1 by 3, 
+	    vertical sep=1.3cm,
+	},
+	xtick pos = left,
+	ytick pos = bottom,
+]
+
+
+\nextgroupplot[
+	ylabel= efficiency $E$,
+    xlabel= normalized load $x$,
+    ymax = 1,
+    ymin = 0.01,
+    xmin = 0.0,
+    xmax = 8.3,
+    ymode=log,
+    ytick={0.01,0.1,1},
+    yticklabels={$10^{\text{-}2}$,$10^{\text{-}1}$,$10^0$},
+    width = 3.5in,
+    height = 6cm,
+    x label style={at={(axis description cs:0.5,0.0)},anchor=north},
+    y label style={at={(axis description cs:0.1,.5)},anchor=south},
+    label style={font=\small},
+    tick label style={font=\scriptsize},
+    cycle list name=color list,
+    every axis plot/.append style={mark=*,ultra thin,smooth,tension = 0.3, every mark/.append style={scale=0.7},},
+]
+
+\addplot+ table [y index=1, x index=0]{simdata/two_nodes_N_2_cap_8_B_1.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/ring_N_25_cap_8_B_6.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/ring_N_100_cap_8_B_6.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/complete_graph_N_5_cap_8_B_10.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/grid_N_100_cap_8_B_98.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/torus_N_25_cap_8_B_42.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/torus_N_100_cap_8_B_167.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/simplified_city_N_16_cap_8_B_23.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/3cayley_tree_N_46_cap_8_B_124.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/delaunay_random_torus_N_25_cap_8_B_49.dateff.dat};
+
+\addplot+ table [y index=1, x index=0]{simdata/delaunay_random_torus_N_100_cap_8_B_284.dateff.dat};
+
+\addplot+[gray, dashed, sharp plot] coordinates {(-0.5,0.5) (8.5, 0.5)};
+\addplot+[gray, dashed] coordinates {(6.0,0.0001) (6.0, 1.1)};
+
+\addplot+[black, dashed, thick] coordinates {(8.0,0.0001) (8.0, 1.1)};
+
+\node[anchor=north east, draw] at (rel axis cs:0.94,0.98) {\small $\theta = 8$};
+
+\node (insetnode) at (rel axis cs:0.0,0.0) {};
+
+
+\end{groupplot}
+\begin{axis} [
+    at={(insetnode)},
+    anchor=south west,
+    yshift=0.8cm,
+    xshift=0.9cm,
+    width=4.5cm,
+    xmin = 0.0,
+    xmax = 8.3,
+    ymax = 1,
+    ymin = 0.01,
+    ymode=log,
+    xtick pos = left,
+	ytick pos = bottom,
+    ytick={0.01,0.1,1},
+    yticklabels={$10^{\text{-}2}$,$10^{\text{-}1}$,$10^0$},
+    label style={font=\small},
+    tick label style={font=\tiny},
+    cycle list name=color list,
+    every axis plot/.append style={ultra thin,,
+    every mark/.append style={scale=0.5},},
+] 
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/two_nodes_N_2_cap_-1_B_1.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/complete_graph_N_5_cap_-1_B_10.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/ring_N_25_cap_-1_B_6.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/ring_N_100_cap_-1_B_6.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/grid_N_100_cap_-1_B_98.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/torus_N_25_cap_-1_B_42.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/torus_N_100_cap_-1_B_167.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/simplified_city_N_16_cap_-1_B_23.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/3cayley_tree_N_46_cap_-1_B_124.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/delaunay_random_torus_N_25_cap_-1_B_49.dateff.dat};
+
+\addplot+[mark=*] table [y index=1, x index=0]{simdata/delaunay_random_torus_N_100_cap_-1_B_284.dateff.dat};
+
+\addplot+[gray, densely dashed, sharp plot] coordinates {(-0.5,0.5) (8.5, 0.5)};
+
+\node[anchor=south east, draw] at (rel axis cs:0.95,0.05) {\small $\theta = \infty$};
+
+\end{axis}
+
+\end{tikzpicture}
+\end{tabular}
+\end{document}

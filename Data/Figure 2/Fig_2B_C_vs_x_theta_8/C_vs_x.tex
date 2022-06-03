@@ -1,0 +1,74 @@
+\documentclass[class=scrreprt,border=0pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\usepackage{amstext}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{decorations.text}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmath} % Enables turning on sans-serif math mode, and using other environments
+\sansmath % Enable sans-serif math for rest of document
+
+
+\begin{document}
+
+\begin{tabular}{ll}
+\begin{tikzpicture}
+\begin{groupplot} [
+	group style={
+	    group name=limresults,
+		group size=1 by 3, 
+	    vertical sep=1.3cm,
+	},
+	xtick pos = left,
+	ytick pos = bottom,
+]
+
+\nextgroupplot[
+  xlabel= normalized load $x$,
+  ylabel= scheduled customers $\langle C \rangle$,
+  ymin = 0,
+  ymax  = 20,
+  xmin = 0,
+  xmax = 8.3,
+  width = 3.5in,
+  height = 6cm,
+  x label style={at={(axis description cs:0.5,0.0)},anchor=north},
+  y label style={at={(axis description cs:0.1,.5)},anchor=south},
+  legend style={text opacity =1,fill=none,font=\scriptsize,cells={anchor=west}, draw=none},
+  legend pos = north west,
+  label style={font=\small},
+  tick label style={font=\scriptsize},
+  cycle list name=color list
+]
+
+\addplot+[mark=*, ultra thin, teal!50] table [y=C, x=x] {simdata/torus_N_25_cap_8_B_50_C_x_plot.txt};
+\addlegendentry{torus (small), $B=50$}
+
+\addplot+[mark=*, ultra thin, teal] table [y=C, x=x] {simdata/torus_N_25_cap_8_B_100_C_x_plot.txt};
+\addlegendentry{torus (small), $B=100$}
+
+\addplot+[mark=*, ultra thin, blue!50] table [y=C, x=x] {simdata/complete_graph_N_5_cap_8_B_50_C_x_plot.txt};
+\addlegendentry{complete graph, $B = 50$}
+
+\addplot+[mark=*, ultra thin, blue] table [y=C, x=x] {simdata/complete_graph_N_5_cap_8_B_100_C_x_plot.txt};
+\addlegendentry{complete graph, $B = 100$}
+
+
+\addplot+[gray, very thick, dashed] coordinates {(0,0) (13.0, 13.0)};\label{Cxhelpline}
+\addlegendentry{$\langle C \rangle = x$}
+%\node[/pgfplots/refstyle={Cxhelpline},anchor=west] at (8.0,8.0) {\footnotesize $C = x$};
+
+\addplot+[black, dashed, thick] coordinates {(8.0,-1.0) (8.0, 50.0)};
+	
+\node[anchor=south east, draw] at (rel axis cs:0.94,0.02) {\small $\theta = 8$};
+	
+
+\end{groupplot}
+
+\end{tikzpicture}
+\end{tabular}
+\end{document}

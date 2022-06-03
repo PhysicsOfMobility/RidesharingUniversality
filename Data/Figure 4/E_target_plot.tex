@@ -1,0 +1,99 @@
+\documentclass[class=scrreprt,border=0pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\usepackage{amstext}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{decorations.text}
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{sansmath} % Enables turning on sans-serif math mode, and using other environments
+\sansmath % Enable sans-serif math for rest of document
+
+
+
+\begin{document}
+
+
+
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={
+		group name = predB,
+		group size= 1 by 3, 
+		xticklabels at = edge bottom,
+	    x descriptions at = edge bottom,
+	    horizontal sep=0.2cm,
+	    vertical sep = 0.5cm,
+		},
+  ymode=log,
+  xlabel= $\theta$,
+  ylabel= $B_\mathrm{tar}$,
+  xmin = 0,
+  ymin = 0.7,
+  ymax=1500,
+  width = 8cm, height = 7cm,
+  label style={font=\small},
+  tick label style={font=\small},  
+  cycle list name=color list
+]
+
+
+\nextgroupplot
+
+\addplot+[sharp plot] table {Aim_sim/two_nodes_N_2_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/ring_N_25_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/ring_N_100_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/complete_graph_N_5_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/grid_N_100_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/torus_N_25_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/torus_N_100_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/simplified_city_N_16_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/3cayley_tree_N_46_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/delaunay_random_torus_N_25_aim_0.750_xa3.dat};
+
+\addplot+[sharp plot] table {Aim_sim/delaunay_random_torus_N_100_aim_0.750_xa3.dat};
+
+\pgfplotsset{cycle list shift=-11}
+
+\addplot+[only marks] table{Aim_sim/b_theta_two_nodes_N_2_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table{Aim_sim/b_theta_ring_N_25_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table{Aim_sim/b_theta_ring_N_100_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table {Aim_sim/b_theta_complete_graph_N_5_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table {Aim_sim/b_theta_grid_N_100_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table {Aim_sim/b_theta_torus_N_25_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table {Aim_sim/b_theta_torus_N_100_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table {Aim_sim/b_theta_simplified_city_N_16_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table {Aim_sim/b_theta_3cayley_tree_N_46_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table {Aim_sim/b_theta_delaunay_random_torus_N_25_E_aim_0.7500_xa3_exp.txt};
+
+\addplot+[only marks] table {Aim_sim/b_theta_delaunay_random_torus_N_100_E_aim_0.7500_xa3_exp.txt};
+
+\node[anchor=north east, rectangle, fill=white, draw] at (rel axis cs:1.0,1.0) {$E_\mathrm{tar} = 0.75$};
+
+
+\end{groupplot}
+\end{tikzpicture}
+
+
+\end{document}

@@ -1,0 +1,91 @@
+\documentclass[class=scrreprt,border=0pt]{standalone}
+
+\usepackage{tikz}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\usepackage{amstext}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{decorations.text}
+\pgfplotsset{compat=newest}
+
+\begin{document}
+
+\newcommand{\red}[1]{{\color{red}{#1}}}
+\newcommand{\blue}[1]{{\color{blue}{#1}}}
+
+\begin{tikzpicture}
+\begin{groupplot}[
+	group style={
+	    group name=beff,
+		group size=1 by 2, 
+	    vertical sep=1.3cm,
+	},
+]
+
+\nextgroupplot[
+  xlabel= {$E(\mathcal{G},B,x,\theta)$},
+  ylabel= {$E_(\mathcal{G},\, \cdot \, ,x,\infty)$},
+  xmode = log,
+  ymode = log,
+  ymin = 0.04,
+  ymax=1.05,
+  xmin=0.04,
+  xmax=1.05,
+  x label style={at={(axis description cs:0.5,-0.05)},anchor=north},
+  width = 8.0cm, height = 8.0cm,
+  legend image post style={scale=1.8},
+  legend style={font=\small,cells={anchor=west}},
+  legend pos = north west,
+  label style={font=\small},
+  tick label style={font=\small},
+  cycle list name=color list,
+  clip mode=individual,
+]
+
+\addplot+[only marks, mark size = 1.2pt, blue!30, draw opacity=0] table [y=EunlB, x=ElimB]{simdata/effcomp_complete_0.00_0.80.txt};
+\addlegendentry{$E(\mathcal{G},B,x,\infty)$}
+
+\addplot+[only marks, mark size = 1.2pt, blue, fill opacity = 1.0, draw opacity=0] table [y=EunlBeff, x=ElimB]{simdata/effcomp_complete_0.00_0.80.txt};
+\addlegendentry{$E(\mathcal{G},B_\mathrm{eff},x,\infty)$}
+
+\addplot+[black, dashed, very thick, sharp plot] coordinates {(0.01,0.01) (1.1, 1.1)};
+
+\node[anchor=south east, draw] at (rel axis cs:0.95,0.05) {\small $p_\mathrm{full} \leq 0.8$};
+
+
+\nextgroupplot[
+  colorbar,
+  colorbar style={
+    ylabel = $p_\mathrm{full}$,
+    label style={font=\small},
+  },
+  width = 8.0cm,
+  height = 6.5cm,
+  ymin = 0.03,
+  ymax = 1.05,
+  xmin = 0.01,
+  xmax = 100,
+  xtick pos = left,
+  ytick pos = bottom,
+  xlabel = $B_\mathrm{eff} / B_{1/2}$,
+  ylabel = $E$,
+  xmode=log,
+  ymode=log,
+  label style={font=\small},
+  tick label style={font=\small},
+  every axis plot/.append style={only marks, mark=*, every mark/.append style={scale=0.6},},
+  point meta min=0,point meta max=1,
+]
+
+\pgfplotsset{
+colormap={bluewhite}{rgb255(0cm)=(0,0,255); rgb255(1cm)=(255,255,255)}
+}
+
+\addplot[scatter,only marks, scatter/use mapped color=
+        {draw opacity=0,fill=mapped color}, scatter src=explicit] table[x=Beff,y=ElimB,meta=pfull] {simdata/effcomp4_complete.txt};
+
+\end{groupplot}
+\node[text width=1cm,align=center,anchor=east,font=\huge] at ([xshift=-14mm]beff c1r1.north west) {\large \textbf{A}};
+\node[text width=1cm,align=center,anchor=east,font=\huge] at ([xshift=-14mm]beff c1r2.north west) {\large \textbf{B}};
+\end{tikzpicture}
+\end{document}

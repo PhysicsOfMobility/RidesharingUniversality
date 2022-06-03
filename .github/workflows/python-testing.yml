@@ -12,7 +12,7 @@ jobs:
 
     - name: Install system dependencies using apt
       run: |
-        sudo apt-get update && sudo apt-get -y install build-essential cmake
+        sudo apt-get update && sudo apt-get -y install build-essential cmake libboost-all-dev
 
 
     - name: Build

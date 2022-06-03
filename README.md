@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/497852121.svg)](https://zenodo.org/badge/latestdoi/497852121)
+
 
 # Collective dynamics of capacity-constrained ride-pooling fleets
 

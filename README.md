@@ -1,4 +1,4 @@
-
+[![Tests](https://github.com/PhysicsOfMobility/RidesharingUniversality/actions/workflows/build-and-run.yml/badge.svg)](https://github.com/PhysicsOfMobility/RidesharingUniversality/actions/workflows/build-and-run.yml)
 
 # Collective dynamics of capacity-constrained ride-pooling fleets
 

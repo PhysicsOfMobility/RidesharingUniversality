@@ -4,7 +4,7 @@
 
 This is the code underlying the paper "Collective dynamics of capacity-constrained ride-pooling fleets" by R. Zech, N. Molkenthin, M. Timme, and M. Schröder.
 
-## CODE
+## Code
 
 The program simulates the dynamics of a ride-sharing fleet on a given network where requests are arbitrarily (uncorrelated origin and destination) distributed in space and Poisson-distribution in time. The dispatcher algorithm minimizes the arrival time of new requests (secondary: max pickup, tertiary: max occupancy) without delaying previously accepted requests. The simulation outputs a list of average observables as defined in README_data_file_structure.txt (see sample output).
 

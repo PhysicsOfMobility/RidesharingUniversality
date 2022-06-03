@@ -70,7 +70,8 @@ struct offer
 			is_better_offer(false)
 		{};
 
-	offer() : dropoff_time( std::numeric_limits<double>::infinity() ) {};
+    offer() : dropoff_time( std::numeric_limits<double>::infinity()), is_better_offer(false)  {};
+
 };
 
 class transporter

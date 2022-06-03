@@ -1,0 +1,38 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository 
+      uses: actions/checkout@v2
+
+    - name: Install system dependencies using apt
+      run: |
+        sudo apt-get update && sudo apt-get -y install build-essential cmake libboost-all-dev
+
+
+    - name: Build
+      run: |
+        cd Code
+        mkdir build
+        cd build
+        cmake ..
+        make -j2
+
+    - name: Run
+      run: |
+        ./Code/build/ridesharing_universality
+
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1.9
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        check_name: Unit Test Results
+        files: test-junit-reports/*.xml
+        report_individual_runs: true
+        deduplicate_classes_by_file_name: false

@@ -208,7 +208,7 @@ int main(int argc, char* argv[])
 		{
 			std::cout << "running simulation: " << topology << ", B = " << number_of_buses << ", x = " << normalized_request_rate << std::endl;
 
-			sim.run_sim_requests( 3 );
+			sim.run_sim_requests( 10 );
 			//measure once per request per bus (on average)
 			//sim.enable_measurements( number_of_buses/sim.request_rate );
 			//sim.run_sim_requests( 2 );

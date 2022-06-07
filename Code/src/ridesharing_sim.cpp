@@ -322,6 +322,9 @@ double ridesharing_sim::execute_next_event()
 			//else
 			//	current_offer.is_better_offer = false;
 			
+			assert( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) >= 0 );
+			
+			//this if does not break here
 			if( ( current_offer.dropoff_time < current_best_offer.dropoff_time ) ||
 				( current_offer.dropoff_time == current_best_offer.dropoff_time && current_offer.pickup_time > current_best_offer.pickup_time ) ||
 				( current_offer.dropoff_time == current_best_offer.dropoff_time && current_offer.pickup_time == current_best_offer.pickup_time && ( current_offer.best_transporter != NULL && current_offer.best_transporter->get_occupancy() > current_best_offer.best_transporter->get_occupancy() ) ) ||

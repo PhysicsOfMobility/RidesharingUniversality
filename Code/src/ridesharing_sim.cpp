@@ -302,6 +302,16 @@ double ridesharing_sim::execute_next_event()
 		for(transporter& t : transporter_list)
 		{
 			current_offer = t.best_offer(request_origin, request_destination, event_time, network, current_best_offer);
+			
+			if( (current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON ) ||
+				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && current_offer.pickup_time > current_best_offer.pickup_time + MACRO_EPSILON ) ||
+				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && abs(current_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_offer.best_transporter != NULL && occupancy > current_best_offer.best_transporter->get_occupancy() ) ) ||
+				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && abs(current_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_offer.best_transporter != NULL && occupancy == current_best_offer.best_transporter->get_occupancy() ) )
+			  )
+				current_offer.is_better_offer = true;
+			else
+				current_offer.is_better_offer = false;
+			
 			if( current_offer.is_better_offer )
 			{
 				assert( current_offer.dropoff_time <= current_best_offer.dropoff_time + 2*MACRO_EPSILON );

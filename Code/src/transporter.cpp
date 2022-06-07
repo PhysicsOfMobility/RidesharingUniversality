@@ -615,9 +615,9 @@ offer transporter::best_offer_unlimited( ULL param_origin, ULL param_destination
 
 	//decide again if best offer of this bus is better than the current best offer
 	if( ( best_offer.dropoff_time < current_best_offer.dropoff_time ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time > current_best_offer.pickup_time + MACRO_EPSILON ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time == current_best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > current_best_offer.best_transporter->get_occupancy() ) ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time == current_best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == current_best_offer.best_transporter->get_occupancy() ) )
+				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time > current_best_offer.pickup_time ) ||
+				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time == current_best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > current_best_offer.best_transporter->get_occupancy() ) ) ||
+				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time == current_best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == current_best_offer.best_transporter->get_occupancy() ) )
 			  )
 		best_offer.is_better_offer = true;
 	else

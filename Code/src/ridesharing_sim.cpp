@@ -309,12 +309,12 @@ double ridesharing_sim::execute_next_event()
 			//if( current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON )
 			//	current_offer.is_better_offer = true;
 			
-			//if( (current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON ) ||
-			//	( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && current_offer.pickup_time > current_best_offer.pickup_time + MACRO_EPSILON ) ||
-			//	( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && abs(current_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_offer.best_transporter != NULL && current_offer.best_transporter->get_occupancy() > current_best_offer.best_transporter->get_occupancy() ) ) ||
-			//	( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && abs(current_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_offer.best_transporter != NULL && current_offer.best_transporter->get_occupancy() == current_best_offer.best_transporter->get_occupancy() ) )
-			//  )
-			if( current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON )
+			if( (current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON ) ||
+				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && current_offer.pickup_time > current_best_offer.pickup_time + MACRO_EPSILON ) ||
+				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && abs(current_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_offer.best_transporter != NULL && current_offer.best_transporter->get_occupancy() > current_best_offer.best_transporter->get_occupancy() ) ) ||
+				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && abs(current_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_offer.best_transporter != NULL && current_offer.best_transporter->get_occupancy() == current_best_offer.best_transporter->get_occupancy() ) )
+			  )
+			//if( current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON )
 			{
 				current_offer.is_better_offer = true;
 			}

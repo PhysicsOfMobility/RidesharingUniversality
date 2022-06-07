@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 	std::ofstream out(filename.str().c_str());
 
 //	std::vector<ULL> number_of_buses_list = {1, 2, 3, 4, 6, 8, 11, 16, 22, 32, 45, 64, 91, 128, 181, 256, 362, 512, 724, 1024, 1448, 2048};
-	std::vector<ULL> number_of_buses_list = {2};
+	std::vector<ULL> number_of_buses_list = {10};
 //	std::vector<double> normalized_request_rate_list = {0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0};
 	std::vector<double> normalized_request_rate_list = {3.0};
 
@@ -208,7 +208,7 @@ int main(int argc, char* argv[])
 		{
 			std::cout << "running simulation: " << topology << ", B = " << number_of_buses << ", x = " << normalized_request_rate << std::endl;
 
-			sim.run_sim_requests( 10 );
+			sim.run_sim_requests( 4 );
 			//measure once per request per bus (on average)
 			//sim.enable_measurements( number_of_buses/sim.request_rate );
 			//sim.run_sim_requests( 2 );

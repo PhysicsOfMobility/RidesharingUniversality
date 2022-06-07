@@ -20,7 +20,7 @@ void measurement_collector::measure_request(customer& c, transporter& t)
 	else
 		new_measurement(delayed_due_to_capacity, 0);
 
-	if( abs(c.get_dropoff_time() - c.get_pickup_time()  -  network.get_network_distance(c.get_origin(), c.get_destination()) / t.get_velocity() ) > 10 * MACRO_EPSILON )
+	if( c.get_dropoff_time() - c.get_pickup_time() > network.get_network_distance(c.get_origin(), c.get_destination()) / t.get_velocity() + MACRO_EPSILON )
 		new_measurement(fraction_of_delayed_trips, 1);
 	else
 		new_measurement(fraction_of_delayed_trips, 0);

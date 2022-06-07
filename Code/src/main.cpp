@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	for(ULL number_of_buses : number_of_buses_list)
 	{
 		//initialize simulation class
-		ridesharing_sim sim(number_of_nodes, number_of_buses, 10, capacity);
+		ridesharing_sim sim(number_of_nodes, number_of_buses, 100, capacity);
 
 		//create topologies
 		//add links for each node in the network

@@ -309,19 +309,17 @@ double ridesharing_sim::execute_next_event()
 			//if( current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON )
 			//	current_offer.is_better_offer = true;
 			
+			//this if fails here
 			if( (current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON ) ||
 				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && current_offer.pickup_time > current_best_offer.pickup_time + MACRO_EPSILON ) ||
 				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && abs(current_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_offer.best_transporter != NULL && current_offer.best_transporter->get_occupancy() > current_best_offer.best_transporter->get_occupancy() ) ) ||
 				( abs(current_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && abs(current_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_offer.best_transporter != NULL && current_offer.best_transporter->get_occupancy() == current_best_offer.best_transporter->get_occupancy() ) )
 			  )
+			//this if does not fail here
 			//if( current_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON )
-			{
 				current_offer.is_better_offer = true;
-			}
 			else
-			{
 				current_offer.is_better_offer = false;
-			}
 			
 			if( current_offer.is_better_offer )
 			{

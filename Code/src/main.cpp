@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	for(ULL number_of_buses : number_of_buses_list)
 	{
 		//initialize simulation class
-		ridesharing_sim sim(number_of_nodes, number_of_buses, 100, capacity);
+		ridesharing_sim sim(number_of_nodes, number_of_buses, 0, capacity);
 
 		//create topologies
 		//add links for each node in the network
@@ -208,10 +208,10 @@ int main(int argc, char* argv[])
 		{
 			std::cout << "running simulation: " << topology << ", B = " << number_of_buses << ", x = " << normalized_request_rate << std::endl;
 
-			sim.run_sim_requests( std::max( (ULL)100000, 1000*number_of_buses ) );
+			sim.run_sim_requests( 1000 );
 			//measure once per request per bus (on average)
 			sim.enable_measurements( number_of_buses/sim.request_rate );
-			sim.run_sim_requests( std::max( (ULL)100000, 1000*number_of_buses ) );
+			sim.run_sim_requests( 1000 );
 
 			//output results
 			sim.print_params(out);

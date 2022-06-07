@@ -20,6 +20,7 @@ class transporter;
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cmath>
 
 #include "measurement_collector.h"
 #include "traffic_network.h"

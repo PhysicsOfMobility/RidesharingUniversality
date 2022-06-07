@@ -298,6 +298,8 @@ double ridesharing_sim::execute_next_event()
 		std::tie( request_origin, request_destination ) = network.generate_request();
 
 		current_best_offer = offer();
+		current_best_offer.dropoff_time = std::numeric_limits<double>::infinity();
+		
 		//find the best offer for the request
 		for(transporter& t : transporter_list)
 		{

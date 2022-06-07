@@ -304,7 +304,7 @@ double ridesharing_sim::execute_next_event()
 			current_offer = t.best_offer(request_origin, request_destination, event_time, network, current_best_offer);
 			if( current_offer.is_better_offer )
 			{
-				assert( current_offer.dropoff_time <= current_best_offer.dropoff_time + 2+MACRO_EPSILON);
+				assert( current_offer.dropoff_time <= current_best_offer.dropoff_time + 2*MACRO_EPSILON );
 				current_best_offer = current_offer;
 			}
 		}
@@ -318,7 +318,7 @@ double ridesharing_sim::execute_next_event()
 				current_offer_unlimited = t.best_offer_unlimited(request_origin, request_destination, event_time, network, current_best_offer_unlimited);
 				if( current_offer_unlimited.is_better_offer )
 				{
-					assert( current_offer_unlimited.dropoff_time <= current_best_offer_unlimited.dropoff_time + 2+MACRO_EPSILON);
+					assert( current_offer_unlimited.dropoff_time <= current_best_offer_unlimited.dropoff_time + 2*MACRO_EPSILON );
 					current_best_offer_unlimited = current_offer_unlimited;
 				}
 			}

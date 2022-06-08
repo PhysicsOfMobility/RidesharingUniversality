@@ -1,14 +1,22 @@
 #ifndef TRANSPORTER_H
 #define TRANSPORTER_H
 
+#include <cstdint>
+#include <cstddef>
 #include <cstdlib>
 #include <algorithm>
+#include <utility>
 #include <limits>
+#include <cmath>
 #include <random>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
 #include <deque>
 #include <list>
-#include <cmath>
+
 #include <cassert>
 
 #ifndef _INTEGER_TYPES

@@ -164,11 +164,26 @@ void traffic_network::recalc_mean_distances()
 	mean_dropoff_distance = 0;
 	for(ULL i = 0; i < number_of_nodes; ++i)
 	{
+	    double mean_pickup_distance_i = 0;
+        double mean_dropoff_distance_i = 0;
+
+        double total_probability = 0;
+
 		for(ULL j = 0; j < number_of_nodes; ++j)
 		{
-			mean_dropoff_distance += origin_probabilities[i] * destination_probabilities[j] * get_network_distance(i,j);
-			mean_pickup_distance += origin_probabilities[i] * destination_probabilities[j] * get_network_distance(j,i);
+		    if(j != i)
+            {
+                mean_dropoff_distance_i += destination_probabilities[j] * get_network_distance(i,j);
+                mean_pickup_distance_i += destination_probabilities[j] * get_network_distance(j,i);
+                total_probability += destination_probabilities[j];
+            }
 		}
+
+		mean_dropoff_distance_i /= total_probability;
+		mean_pickup_distance_i /= total_probability;
+
+        mean_dropoff_distance += origin_probabilities[i] * mean_pickup_distance_i;
+        mean_pickup_distance += origin_probabilities[i] * mean_dropoff_distance_i;
 	}
 }
 

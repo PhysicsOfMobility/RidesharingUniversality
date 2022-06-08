@@ -1,31 +1,27 @@
 #ifndef RIDSHARING_SIM_H
 #define RIDSHARING_SIM_H
 
+#include <csdtint>
+#include <queue>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <random>
+
 #ifndef _INTEGER_TYPES
 	#define ULL uint64_t
 	#define LL int64_t
 	#define _INTEGER_TYPES
 #endif
 
-#ifndef _EPSILON
-	#define MACRO_EPSILON 0.000000000001
-	#define _EPSILON
-#endif
-
-class customer;
-class transporter;
-
-#include <queue>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cmath>
-
 #include "measurement_collector.h"
 #include "traffic_network.h"
 #include "customer.h"
 #include "transporter.h"
+
+class customer;
+class transporter;
 
 typedef std::priority_queue< std::pair<double, ULL>, std::vector<std::pair<double, ULL> >, std::greater< std::pair<double, ULL> > > transporter_event_queue_type;
 

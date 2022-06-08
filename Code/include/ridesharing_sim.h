@@ -1,7 +1,7 @@
 #ifndef RIDSHARING_SIM_H
 #define RIDSHARING_SIM_H
 
-#include <csdtint>
+#include <cstdint>
 #include <queue>
 #include <vector>
 #include <iostream>

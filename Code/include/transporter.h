@@ -2,9 +2,14 @@
 #define TRANSPORTER_H
 
 #include <cstdlib>
+#include <algorithm>
+#include <limits>
+#include <random>
 #include <iostream>
 #include <deque>
 #include <list>
+#include <cmath>
+#include <cassert>
 
 #ifndef _INTEGER_TYPES
 	#define ULL uint64_t

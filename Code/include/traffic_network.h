@@ -1,5 +1,5 @@
-#ifndef TRAFFIC_NETWORK_H
-#define TRAFFIC_NETWORK_H
+#ifndef TRANSPORTER_H
+#define TRANSPORTER_H
 
 #include <cstdint>
 #include <cstddef>
@@ -14,12 +14,8 @@
 #include <sstream>
 #include <string>
 
-#include <map>
-#include <set>
-#include <vector>
-#include <tuple>
-#include <queue>
 #include <deque>
+#include <list>
 
 #include <cassert>
 
@@ -28,6 +24,15 @@
 	#define LL int64_t
 	#define _INTEGER_TYPES
 #endif
+
+#ifndef _EPSILON
+	#define MACRO_EPSILON 0.000000000001
+	#define _EPSILON
+#endif
+
+#include "measurement_collector.h"
+#include "customer.h"
+#include "traffic_network.h"
 
 class traffic_network
 {

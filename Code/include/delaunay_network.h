@@ -1,8 +1,19 @@
 #ifndef DELAUNAY_NETWORK_H
 #define DELAUNAY_NETWORK_H
 
-
 #include <cstdint>
+#include <cstddef>
+#include <cstdlib>
+#include <algorithm>
+#include <utility>
+#include <limits>
+#include <cmath>
+#include <random>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
 #include <boost/range/irange.hpp>
 #include <boost/range/iterator_range.hpp>
 
@@ -18,7 +29,6 @@
 #include <boost/random.hpp>
 #include <boost/random/random_number_generator.hpp>
 
-#include <limits>
 #include <map>
 #include <set>
 

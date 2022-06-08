@@ -211,25 +211,59 @@ int main(int argc, char* argv[])
 			double old_normalized_request_rate = 0;
 			double normalized_request_rate_ramp_up_step = 0.05;
 			double normalized_request_rate_ramp_up = 0;
+
+			ULL total_occupancy = 0;
+			ULL total_planned_stops = 0;
+
 			for(normalized_request_rate_ramp_up = old_normalized_request_rate + normalized_request_rate_ramp_up_step; normalized_request_rate_ramp_up < normalized_request_rate + normalized_request_rate_ramp_up_step/2; normalized_request_rate_ramp_up += normalized_request_rate_ramp_up_step)
 			{
 				sim.set_normalized_request_rate(normalized_request_rate_ramp_up);
 				sim.run_sim_requests( std::max((ULL)1000, std::max((ULL)(normalized_request_rate_ramp_up*1000), (ULL)(5*normalized_request_rate_ramp_up*number_of_buses) ) ) );
+
+				total_occupancy = 0;
+				total_planned_stops = 0;
+
+				for(transporter& t : sim.transporter_list)
+				{
+					total_occupancy += t.get_occupancy();
+					total_planned_stops += t.get_number_of_planned_stops();
+				}
+
+				//stop simulations if system overloads: temporary efficiency smaller than 0.05 = 1 / 20
+				if( total_occupancy + total_planned_stops > 40 * number_of_buses * normalized_request_rate_ramp_up )
+					break;
 			}
 
-			sim.set_normalized_request_rate(normalized_request_rate);
+			//only do simulations if system not overloaded: temporary efficiency smaller than 0.05 = 1 / 20
+			if( total_occupancy + total_planned_stops < 40 * number_of_buses * normalized_request_rate_ramp_up )
+			{
+				sim.set_normalized_request_rate(normalized_request_rate);
 
-			//equilibrate with the desired request rate
-			sim.run_sim_requests( std::max( (ULL)10000, 100*number_of_buses ) );
-			//measure once per request per bus (on average)
-			sim.enable_measurements( number_of_buses/sim.request_rate );
-			sim.run_sim_requests( std::max( (ULL)100000, 1000*number_of_buses ) );
+				//equilibrate with the desired request rate
+				sim.run_sim_requests( std::max( (ULL)10000, 100*number_of_buses ) );
 
-			//output results
-			sim.print_params(out);
-			sim.print_measurements(out);
+				total_occupancy = 0;
+				total_planned_stops = 0;
+				for(transporter& t : sim.transporter_list)
+				{
+					total_occupancy += t.get_occupancy();
+					total_planned_stops += t.get_number_of_planned_stops();
+				}
 
-			sim.disable_measurements();
+				//stop simulations if system overloads: temporary efficiency smaller than 0.05 = 1 / 20
+				if( total_occupancy + total_planned_stops < 40 * number_of_buses * normalized_request_rate_ramp_up )
+				{
+					//measure once per request per bus (on average)
+					sim.enable_measurements( number_of_buses/sim.request_rate );
+					sim.run_sim_requests( std::max( (ULL)100000, 1000*number_of_buses ) );
+
+					//output results
+					sim.print_params(out);
+					sim.print_measurements(out);
+
+					sim.disable_measurements();
+				}
+			}
 		}
 
 

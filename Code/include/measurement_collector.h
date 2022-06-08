@@ -1,5 +1,5 @@
-#ifndef TRAFFIC_NETWORK_H
-#define TRAFFIC_NETWORK_H
+#ifndef MEASUREMENT_COLLECTOR_H
+#define MEASUREMENT_COLLECTOR_H
 
 #include <cstdint>
 #include <cstddef>
@@ -14,20 +14,20 @@
 #include <sstream>
 #include <string>
 
-#include <map>
-#include <set>
-#include <vector>
-#include <tuple>
-#include <queue>
-#include <deque>
-
-#include <cassert>
-
 #ifndef _INTEGER_TYPES
 	#define ULL uint64_t
 	#define LL int64_t
 	#define _INTEGER_TYPES
 #endif
+
+#ifndef _EPSILON
+	#define MACRO_EPSILON 0.000000000001
+	#define _EPSILON
+#endif
+
+#include "customer.h"
+#include "transporter.h"
+#include "traffic_network.h"
 
 class customer;
 class transporter;

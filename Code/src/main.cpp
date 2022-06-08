@@ -1,12 +1,10 @@
 #include <cstddef>
+#include <cstdint>
 #include <fstream>
+#include <iostream>
 #include <sstream>
-#include <cstdio>
 #include <vector>
 #include <cmath>
-#include <random>
-
-#include <cassert>
 
 #include "ridesharing_sim.h"
 #include "delaunay_network.h"
@@ -15,11 +13,6 @@
 	#define ULL uint64_t
 	#define LL int64_t
 	#define _INTEGER_TYPES
-#endif
-
-#ifndef _EPSILON
-	#define MACRO_EPSILON 0.000001      //comparison of arrival times etc. is considered equal up to this difference
-	#define _EPSILON
 #endif
 
 constexpr double pi = 3.14159265358979323846;

@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <vector>
 
 #ifndef _INTEGER_TYPES
 	#define ULL uint64_t

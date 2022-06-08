@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 #include <map>
 #include <set>
 #include <vector>
@@ -48,7 +49,7 @@ class traffic_network
 		double get_request_asymmetry() {
 											double asymmetry = 0;
 											for(ULL i = 0; i < number_of_nodes; ++i)
-												asymmetry += abs(origin_probabilities[i] - destination_probabilities[i]);
+												asymmetry += std::abs(origin_probabilities[i] - destination_probabilities[i]);
 
 											return( asymmetry/2 );
 									   }

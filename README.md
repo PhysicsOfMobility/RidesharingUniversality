@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6624421.svg)](https://doi.org/10.5281/zenodo.6624421)
+
 [![Tests](https://github.com/PhysicsOfMobility/RidesharingUniversality/actions/workflows/build-and-run.yml/badge.svg)](https://github.com/PhysicsOfMobility/RidesharingUniversality/actions/workflows/build-and-run.yml)
 
 # Collective dynamics of capacity-constrained ride-pooling fleets

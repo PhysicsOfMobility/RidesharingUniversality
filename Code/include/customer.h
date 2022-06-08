@@ -1,15 +1,23 @@
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
 
+#include <cstdint>
+#include <cstddef>
+#include <cstdlib>
+#include <algorithm>
+#include <utility>
+#include <limits>
+#include <cmath>
+#include <random>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
 #ifndef _INTEGER_TYPES
 	#define ULL uint64_t
 	#define LL int64_t
 	#define _INTEGER_TYPES
-#endif
-
-#ifndef _EPSILON
-	#define MACRO_EPSILON 0.000000000001
-	#define _EPSILON
 #endif
 
 #include "traffic_network.h"

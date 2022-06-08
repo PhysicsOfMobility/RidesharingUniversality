@@ -202,13 +202,25 @@ int main(int argc, char* argv[])
 
 
 		//run either of the following two simulations
-
 		//efficiency and other measurements
 		for(double normalized_request_rate : normalized_request_rate_list)
 		{
 			std::cout << "running simulation: " << topology << ", B = " << number_of_buses << ", x = " << normalized_request_rate << std::endl;
 
-			sim.run_sim_requests( std::max( (ULL)100000, 1000*number_of_buses ) );
+			//slowly ramp up request rate to evenly distribute transporters independent of topology
+			double old_normalized_request_rate = 0;
+			double normalized_request_rate_ramp_up_step = 0.05;
+			double normalized_request_rate_ramp_up = 0;
+			for(normalized_request_rate_ramp_up = old_normalized_request_rate + normalized_request_rate_ramp_up_step; normalized_request_rate_ramp_up < normalized_request_rate + normalized_request_rate_ramp_up_step/2; normalized_request_rate_ramp_up += normalized_request_rate_ramp_up_step)
+			{
+				sim.set_normalized_request_rate(normalized_request_rate_ramp_up);
+				sim.run_sim_requests( std::max((ULL)1000, std::max((ULL)(normalized_request_rate_ramp_up*1000), (ULL)(5*normalized_request_rate_ramp_up*number_of_buses) ) ) );
+			}
+
+			sim.set_normalized_request_rate(normalized_request_rate);
+
+			//equilibrate with the desired request rate
+			sim.run_sim_requests( std::max( (ULL)10000, 100*number_of_buses ) );
 			//measure once per request per bus (on average)
 			sim.enable_measurements( number_of_buses/sim.request_rate );
 			sim.run_sim_requests( std::max( (ULL)100000, 1000*number_of_buses ) );

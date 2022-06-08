@@ -1,8 +1,6 @@
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
 
-#include <cassert>
-
 #ifndef _INTEGER_TYPES
 	#define ULL uint64_t
 	#define LL int64_t

@@ -1,9 +1,18 @@
 #ifndef MEASUREMENT_COLLECTOR_H
 #define MEASUREMENT_COLLECTOR_H
 
+#include <cstdint>
+#include <cstddef>
+#include <cstdlib>
+#include <algorithm>
+#include <utility>
+#include <limits>
+#include <cmath>
+#include <random>
 #include <iostream>
 #include <fstream>
-#include <cmath>
+#include <sstream>
+#include <string>
 
 #ifndef _INTEGER_TYPES
 	#define ULL uint64_t

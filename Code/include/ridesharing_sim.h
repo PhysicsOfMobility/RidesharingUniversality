@@ -2,12 +2,20 @@
 #define RIDSHARING_SIM_H
 
 #include <cstdint>
-#include <queue>
-#include <vector>
+#include <cstddef>
+#include <cstdlib>
+#include <algorithm>
+#include <utility>
+#include <limits>
+#include <cmath>
+#include <random>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
-#include <random>
+
+#include <queue>
+#include <vector>
 
 #ifndef _INTEGER_TYPES
 	#define ULL uint64_t

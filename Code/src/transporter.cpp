@@ -201,11 +201,11 @@ offer transporter::best_offer( ULL param_origin, ULL param_destination, double p
 		temp_dropoff_insertion = assigned_stops.end();
 
 		//if better offer, remember
-		if( ( dropoff_time < best_offer.dropoff_time ) ||
-			( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-			( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-			( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
-		  )
+        if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+            ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+            ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+            ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+          )
 		{
 			best_offer.transporter_index = index;
 			best_offer.best_transporter = this;
@@ -263,11 +263,11 @@ offer transporter::best_offer( ULL param_origin, ULL param_destination, double p
 						if( dropoff_is_possible )
 						{
 							//if this is a better dropoff
-							if( ( dropoff_time < best_offer.dropoff_time ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
-							  )
+                            if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+                              )
 							{
 								best_offer.transporter_index = index;
 								best_offer.best_transporter = this;
@@ -290,11 +290,11 @@ offer transporter::best_offer( ULL param_origin, ULL param_destination, double p
 						if( dropoff_is_possible )
 						{
 							//if this is a better dropoff
-							if( ( dropoff_time < best_offer.dropoff_time ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
-							  )
+                            if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+                              )
 							{
 								best_offer.transporter_index = index;
 								best_offer.best_transporter = this;
@@ -331,11 +331,11 @@ offer transporter::best_offer( ULL param_origin, ULL param_destination, double p
 					dropoff_time = temp_time_for_dropoff + n.get_network_distance(temp_location, destination) / velocity;
 
 					//if the drop off at the end is a better offer
-					if( ( dropoff_time < best_offer.dropoff_time ) ||
-						( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-						( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-						( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
-					  )
+                    if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+                        ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+                        ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+                        ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+                      )
 					{
 						best_offer.transporter_index = index;
 						best_offer.best_transporter = this;
@@ -372,10 +372,10 @@ offer transporter::best_offer( ULL param_origin, ULL param_destination, double p
 		{
 			dropoff_time = pickup_time + n.get_network_distance(origin, destination) / velocity;
 
-			if( ( dropoff_time < best_offer.dropoff_time ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+			if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+				( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+				( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+				( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
 			  )
 			{
 				best_offer.transporter_index = index;
@@ -388,14 +388,14 @@ offer transporter::best_offer( ULL param_origin, ULL param_destination, double p
 			}
 		}
 	}else{
-		return(best_offer);	
+		return(best_offer);
 	}
 
 	//decide again if best offer of this bus is better than the current best offer
-	if( ( best_offer.dropoff_time < current_best_offer.dropoff_time ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time > current_best_offer.pickup_time ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time == current_best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > current_best_offer.best_transporter->get_occupancy() ) ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time == current_best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == current_best_offer.best_transporter->get_occupancy() ) )
+	if(best_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON ||
+				( std::abs(best_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && best_offer.pickup_time > current_best_offer.pickup_time + MACRO_EPSILON ) ||
+				( std::abs(best_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(best_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_best_offer.best_transporter != NULL && occupancy > current_best_offer.best_transporter->get_occupancy() ) ) ||
+				( std::abs(best_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(best_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_best_offer.best_transporter != NULL && occupancy == current_best_offer.best_transporter->get_occupancy() ) )
 			  )
 		best_offer.is_better_offer = true;
 	else
@@ -443,11 +443,11 @@ offer transporter::best_offer_unlimited( ULL param_origin, ULL param_destination
 		temp_dropoff_insertion = assigned_stops.end();
 
 		//if better offer, remember
-		if( 		( dropoff_time < best_offer.dropoff_time ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
-		  )
+        if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+            ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+            ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+            ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+          )
 		{
 			best_offer.transporter_index = index;
 			best_offer.best_transporter = this;
@@ -499,11 +499,11 @@ offer transporter::best_offer_unlimited( ULL param_origin, ULL param_destination
 						if( dropoff_is_possible )
 						{
 							//if this is a better dropoff
-							if(     ( dropoff_time < best_offer.dropoff_time ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
-							  )
+                            if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+                              )
 							{
 								best_offer.transporter_index = index;
 								best_offer.best_transporter = this;
@@ -526,11 +526,11 @@ offer transporter::best_offer_unlimited( ULL param_origin, ULL param_destination
 						if( dropoff_is_possible )
 						{
 							//if this is a better dropoff
-							if(	( dropoff_time < best_offer.dropoff_time ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-								( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
-							  )
+                            if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+                                ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+                              )
 							{
 								best_offer.transporter_index = index;
 								best_offer.best_transporter = this;
@@ -560,11 +560,11 @@ offer transporter::best_offer_unlimited( ULL param_origin, ULL param_destination
 					dropoff_time = temp_time_for_dropoff + n.get_network_distance(temp_location, destination) / velocity;
 
 					//if the drop off at the end is a better offer
-					if( ( dropoff_time < best_offer.dropoff_time ) ||
-						( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-						( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-						( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
-					  )
+                    if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+                        ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+                        ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+                        ( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+                      )
 					{
 						best_offer.transporter_index = index;
 						best_offer.best_transporter = this;
@@ -594,10 +594,10 @@ offer transporter::best_offer_unlimited( ULL param_origin, ULL param_destination
 		{
 			dropoff_time = pickup_time + n.get_network_distance(origin, destination) / velocity;
 
-			if( ( dropoff_time < best_offer.dropoff_time ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time > best_offer.pickup_time ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
-				( dropoff_time == best_offer.dropoff_time && pickup_time == best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
+			if(dropoff_time < best_offer.dropoff_time - MACRO_EPSILON ||
+				( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && pickup_time > best_offer.pickup_time + MACRO_EPSILON ) ||
+				( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy > best_offer.best_transporter->get_occupancy() ) ) ||
+				( std::abs(dropoff_time - best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(pickup_time - best_offer.pickup_time) <= MACRO_EPSILON && ( best_offer.best_transporter != NULL && occupancy == best_offer.best_transporter->get_occupancy() ) )
 			  )
 			{
 				best_offer.transporter_index = index;
@@ -610,19 +610,19 @@ offer transporter::best_offer_unlimited( ULL param_origin, ULL param_destination
 			}
 		}
 	}else{
-		return(best_offer);	
+		return(best_offer);
 	}
 
 	//decide again if best offer of this bus is better than the current best offer
-	if( ( best_offer.dropoff_time < current_best_offer.dropoff_time ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time > current_best_offer.pickup_time ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time == current_best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy > current_best_offer.best_transporter->get_occupancy() ) ) ||
-				( best_offer.dropoff_time == current_best_offer.dropoff_time && best_offer.pickup_time == current_best_offer.pickup_time && ( best_offer.best_transporter != NULL && occupancy == current_best_offer.best_transporter->get_occupancy() ) )
+	if(best_offer.dropoff_time < current_best_offer.dropoff_time - MACRO_EPSILON ||
+				( std::abs(best_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && best_offer.pickup_time > current_best_offer.pickup_time + MACRO_EPSILON ) ||
+				( std::abs(best_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(best_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_best_offer.best_transporter != NULL && occupancy > current_best_offer.best_transporter->get_occupancy() ) ) ||
+				( std::abs(best_offer.dropoff_time - current_best_offer.dropoff_time) <= MACRO_EPSILON && std::abs(best_offer.pickup_time - current_best_offer.pickup_time) <= MACRO_EPSILON && ( current_best_offer.best_transporter != NULL && occupancy == current_best_offer.best_transporter->get_occupancy() ) )
 			  )
 		best_offer.is_better_offer = true;
 	else
 		best_offer.is_better_offer = false;
-	
+
 	//return the best offer of this bus (contains whether it is a better offer)
 	return(best_offer);
 }
